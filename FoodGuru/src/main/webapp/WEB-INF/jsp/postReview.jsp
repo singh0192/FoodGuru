@@ -22,9 +22,12 @@ xmlns:v="urn:schemas-microsoft-com:vml">
 	<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
 		
-	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
-
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 
 
 		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -37,8 +40,10 @@ xmlns:v="urn:schemas-microsoft-com:vml">
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
-        width:	50%
+            margin-right: 13%;
+    height: 75%;
+    width: 74%;
+    margin-left: 13%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -63,7 +68,12 @@ xmlns:v="urn:schemas-microsoft-com:vml">
       #map #infowindow-content {
         display: inline;
       }
-
+.controls{
+    z-index: 0;
+    position: absolute;
+    left: 94px;
+    top: 0px;
+    }
       .pac-card {
         margin: 10px 10px 0 0;
         border-radius: 2px 0 0 2px;
@@ -99,7 +109,7 @@ xmlns:v="urn:schemas-microsoft-com:vml">
         margin-left: 12px;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
-        width: 400px;
+        width: 450px;
       }
 
       #pac-input:focus {
@@ -174,7 +184,8 @@ h1 {
 
 input {
   border-radius: 0px 5px 5px 0px;
-  border: 1px solid #eee;
+  border: 1px solid #c3bbbb;
+  background-color: rgba(5, 255, 183, 0.31);
   margin-bottom: 15px;
   width: 90%;
   height: 40px;
@@ -188,7 +199,8 @@ a {
 
 textarea {
   border-radius: 0px 5px 5px 0px;
-  border: 1px solid #EEE;
+ border: 1px solid #c3bbbb;
+ background-color: rgba(5, 255, 183, 0.31);
   margin: 0;
   width: 90%;
   height: 100px; 
@@ -203,11 +215,12 @@ textarea {
 }
 
 .icon-case {
-  width: 35px;
+  width: 4%;
   float: left;
-  border-radius: 5px 0px 0px 5px;
-  background:#eeeeee;
-  height:42px;
+  border-radius: 15px 0px 0px 5px;
+  background-color: #ffe11b;
+  border: 1px solid #c3bbbb;
+  height:41px;
   position: relative;
   text-align: center;
   line-height:40px;
@@ -229,18 +242,25 @@ padding:15px 0;
   width: 100%;
   border:0;
   padding: 17px 25px;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 10px 10px 10px 10px;
   cursor: pointer;
   margin-top: 40px;
   font-size: 18px;
+  margin-bottom: 2%;
+  
 }
 
+.wrapper{
+    padding-right: 25%;
+    padding-left: 25%;
+}
 .leftcontact {
-  width:49.5%; 
+  width:80%; 
   float:left;
-  border-right: 1px dotted #CCC;
+ /*  border-right: 1px dotted #CCC; */
   box-sizing: border-box;
   padding: 0px 15px 0px 0px;
+  margin-left: 10%;
 
 }
 
@@ -273,61 +293,88 @@ padding:15px 0;
   border-radius: 3px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.03);
 }
-
+.rating{
+margin-left: 10%;
+}
 #sendmessage.show,.show  {
   display:block;
 }</style>
   </head>
   <body>
   <h1>Tell About Your Experience .</h1>
-   <div class="info"><h4 target="_blank"><p> Sharing is Caring <i class="fa fa-heart"></i> </p></h4></div>
-   <div class=".formReview">
+   <div class="info"><h4 target="_blank"><p> Sharing <strike>is Caring</strike> Definitely Helps <i class="fa fa-heart"></i> </p></h4></div>
+  <input id="pac-input" class="controls" type="text" placeholder="Place you want to write review for"> </input>
+    <div id="map"></div>
+ 
+   <div class=".formReview" style="
+    padding-top: 2%;
+">
 	   
 	    <div class="leftcontact">
-			      <div class="form-group">
-			        <p>Surname<span>*</span></p>
-			        <span class="icon-case"><i class="fa fa-male"></i></span>
-				        <input type="text" name="nom" id="nom" data-rule="required" />
-                <div class="validation"></div>
-       </div> 
-
+	        <div class=" col-sm-4 col-md-4 rating"><label for="rateYo">Google's Rating: </label><div id="rateYo"></div><div class=" col-sm-1 col-md-1" style="
+    margin-top: -15px;
+"><h3 id="gorat" ></h3></div></div>
+	         <div class=" col-sm-4 col-md-4 yorating"><label for="YoRating">Your Rating: </label><div id="YoRating"></div><h3 id="yorat"></h3></div>
             <div class="form-group">
             <p>Name <span>*</span></p>
             <span class="icon-case"><i class="fa fa-user"></i></span>
-				<input type="text" name="prenom" id="prenom" data-rule="required" />
+				<input type="text" name="prenom" id="prenom" data-rule="required" placeholder="Enter Full Name"/>
                 <div class="validation"></div>
 			</div>
 
-<div class="form-group">
-			<p>City <span>*</span></p>
-			<span class="icon-case"><i class="fa fa-building-o"></i></span>
-				<input type="text" name="ville" id="ville" data-rule="required" />
-                <div class="validation"></div>
-			</div>	
 
-<div class="form-group">
-			<p>Phone number <span>*</span></p>	
+			
+			<div class="form-group">
+			<p>Mobile Number <span>*</span></p>	
 			<span class="icon-case"><i class="fa fa-phone"></i></span>
-				<input type="text" name="phone" id="phone" data-rule="maxlen:10" />
+				<input type="text" name="phone" id="phone" data-rule="maxlen:10" placeholder="Enter Your 10-digit Mobile Number "/>
+                <div class="validation"></div>
+			</div>
+			<div class="form-group">
+			<p>Place Visited<span>*</span></p>
+			<span class="icon-case"><i class="fa fa-building-o"></i></span>
+				<input type="text" name="visited" id="visited" data-rule="required" placeholder="Search your visited place on Map"/>
                 <div class="validation"></div>
 			</div>
 
+
+<div class="form-group">
+			<p>Address <span>*</span></p>
+			<span class="icon-case"><i class="fa fa-building-o"></i></span>
+				 <textarea name="add" id = "add" rows="7" data-rule="required" placeholder="Will Be Auto Populated Based on your Search"></textarea>
+                <div class="validation"></div>
+			</div>
+
+<div class="form-group">
+			<p>Lattitude <span>*</span></p>	
+			<span class="icon-case"><i class="fa fa-map-marker"></i></span>
+				<input type="text" name="lat" id="lat" data-rule="maxlen:25" placeholder="Will Be Auto Populated Based on Your Search"/>
+                <div class="validation"></div>
+			</div>
+			
+			<div class="form-group">
+			<p>Longitude <span>*</span></p>	
+			<span class="icon-case"><i class="fa fa-map-marker"></i></span>
+				<input type="text" name="lng" id="lng" data-rule="maxlen:25" placeholder="Will Be Auto Populated Based on Your Search"/>
+                <div class="validation"></div>
+			</div>
+			
 			<div class="form-group">
 			<p>E-mail <span>*</span></p>	
 			<span class="icon-case"><i class="fa fa-envelope-o"></i></span>
-                <input type="email" name="email" id="email" data-rule="email" />
+                <input type="email" name="email" id="email" data-rule="email" placeholder="Enter Valid Email"/>
                 <div class="validation"></div>
 			</div>	
 
 			<div class="form-group">
-			<p>PROS <span>*</span></p>
+			<p>What You Liked About This Place <span>*</span></p>
 			<span class="icon-case"><i class="fa fa-thumbs-o-up"></i></span>
 				 <textarea name="pros" rows="7" data-rule="required" ></textarea>
                 <div class="validation"></div>
 			</div>
 
 			<div class="form-group">
-			<p>CONS <span>*</span></p>
+			<p>What You Didn't Liked About This Place <span>*</span></p>
 			<span class="icon-case"><i class="fa fa-thumbs-o-down"></i></span>
 				 <textarea name="cons" rows="7" data-rule="required" ></textarea>
                 <div class="validation"></div>
@@ -338,11 +385,14 @@ padding:15px 0;
 			
 
 	</div>
+	 <div class="wrapper">
+	<button type="submit" class="bouton-contact">POST</button>
+	</div>
 	     </div>
 	     
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box"> </input>
-    <div id="map"></div>
-<button type="submit" class="bouton-contact">POST</button>
+	  <!--   <input id="pac-input" class="controls" type="text" placeholder="Search Box"> </input>
+	    <div id="map"></div>
+	 -->
     <script>
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
@@ -388,6 +438,15 @@ padding:15px 0;
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {
+        	  console.log(JSON.stringify(place))
+        	  $("#visited").val(place.name);
+        	  $("#add").val(place.formatted_address+" "+" Phone Number: "+place.formatted_phone_number);
+        	   $("#lat").val(place.geometry.location.lat);
+        	   $("#lng").val(place.geometry.location.lng);
+        	   $("#rateYo").rateYo("option", "rating", place.rating);
+        	   $("#gorat").html(place.rating);
+        	   console.log("no of reviews: "+place.reviews.length)
+        	   
             if (!place.geometry) {
               console.log("Returned place contains no geometry");
               return;
@@ -403,7 +462,7 @@ padding:15px 0;
             // Create a marker for each place.
             markers.push(new google.maps.Marker({
               map: map,
-              icon: icon,
+              icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/48/map-marker-icon.png',
               title: place.name,
               position: place.geometry.location
             }));
@@ -423,6 +482,34 @@ padding:15px 0;
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBezHjTfxKCuTid6kE4MalP3MoIdMUb7Tw&libraries=places&callback=initAutocomplete"
          async defer></script>
   </body>
+  <script type="text/javascript">
+  $(function () {
+	  
+	  $("#rateYo").rateYo({
+	    rating: 0,
+	    readOnly: true
+	  });
+	  
+	  $("#YoRating").rateYo({
+		    rating: 0
+		  });
+	  
+	
+	});
   
+  $("#YoRating").rateYo({
+	  
+	    onSet: function (rating, rateYoInstance) {
+	 
+	      alert("Rating is set to: " + rating);
+	    }
+	  });
+  
+  
+ /*  $("#YoRating").rateYo("option", "onSet", function () {
+	  
+	    console.log("This is a new function");
+	       }); */
+</script>
   
 </html>
